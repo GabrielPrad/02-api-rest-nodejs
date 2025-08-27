@@ -1,0 +1,12 @@
+# Dependencies
+node_module
+
+# Database
+tmp/app.db
+
+# Environment
+.env
+
+# Build / dist
+dist
+node_modules
