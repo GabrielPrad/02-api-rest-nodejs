@@ -11,12 +11,13 @@ if (!process.env.DATABASE_URL) {
 
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: 'sqlite3',
-  connection: {
-    filename: env.DATABASE_URL,
-},
-
-    useNullAsDefault: true,
+    client: env.DATABASE_CLIENT,
+  connection: env.DATABASE_CLIENT === 'sqlite' 
+  ? {
+    filename: env.DATABASE_URL
+  }
+    : env.DATABASE_URL, // Se receber sqlite envia filename, se for pg envia env.DATABASE_URL
+  useNullAsDefault: true,
   migrations: {
     extension: 'ts',
     directory: path.resolve(__dirname, 'db', 'migrations'),
